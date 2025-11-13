@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Payroll Program</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Rajdhani', sans-serif;
+      background: radial-gradient(circle at center, #1a0033, #0a001a 80%);
+      color: #e0d9ff;
+      text-align: center;
+      margin: 0;
+      padding: 40px 0;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3em;
+      color: #b366ff;
+      text-shadow: 0 0 20px #b366ff, 0 0 40px #8000ff;
+      animation: floaty 5s ease-in-out infinite alternate;
+    }
+
+    .input-controls {
+      background: rgba(50, 0, 100, 0.5);
+      border: 2px solid #b366ff;
+      border-radius: 15px;
+      box-shadow: 0 0 25px #8000ff;
+      padding: 20px;
+      width: 350px;
+      margin: 20px auto;
+      text-align: left;
+      animation: floaty 6s ease-in-out infinite alternate;
+    }
+
+    label {
+      display: block;
+      margin-top: 10px;
+      color: #d4b3ff;
+      font-weight: 600;
+    }
+
+    input {
+      width: 100%;
+      padding: 8px;
+      border-radius: 8px;
+      border: none;
+      background: #2a0055;
+      color: #fff;
+      margin-bottom: 10px;
+      box-shadow: 0 0 10px #6f2cff inset;
+    }
+
+    button {
+      width: 48%;
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background: linear-gradient(135deg, #4b00cc, #9900ff);
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      margin-top: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 15px rgba(179, 102, 255, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: linear-gradient(135deg, #b366ff, #6600ff);
+      box-shadow: 0 0 25px #b366ff, 0 0 50px #9900ff;
+      transform: scale(1.05);
+    }
+
+    table {
+      margin: 30px auto;
+      border-collapse: collapse;
+      box-shadow: 0 0 20px #6f2cff;
+      border-radius: 10px;
+      overflow: hidden;
+      width: 80%;
+      max-width: 900px;
+    }
+
+    th, td {
+      padding: 10px 15px;
+      border: 1px solid #b366ff;
+    }
+
+    thead {
+      background: linear-gradient(135deg, #4b00cc, #9900ff);
+      color: white;
+      font-family: 'Orbitron', sans-serif;
+    }
+
+    tbody tr:nth-child(even) {
+      background: rgba(100, 0, 200, 0.3);
+    }
+
+    tfoot {
+      background: rgba(179, 102, 255, 0.2);
+      font-weight: bold;
+      color: #ffccff;
+    }
+
+    .links-container {
+      margin-top: 20px;
+    }
+
+    .links-container a {
+      display: inline-block;
+      padding: 12px 20px;
+      background: linear-gradient(135deg, #4b00cc, #9900ff);
+      border: 2px solid #b366ff;
+      border-radius: 10px;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      text-decoration: none;
+      box-shadow: 0 0 15px rgba(179, 102, 255, 0.4);
+      transition: all 0.3s ease;
+    }
+
+    .links-container a:hover {
+      background: linear-gradient(135deg, #b366ff, #6600ff);
+      box-shadow: 0 0 25px #b366ff, 0 0 50px #9900ff;
+      transform: scale(1.05);
+    }
+
+    @keyframes floaty {
+      from { transform: translateY(0); }
+      to { transform: translateY(-8px); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>The Payroll Program</h1>
+
+  <div class="input-controls">
+    <label for="name">Employee Name:</label>
+    <input id="name" type="text" value="">
+    <label for="days_worked">Days Worked:</label>
+    <input id="days_worked" type="number" value="">
+    <label for="daily_rate">Daily Rate:</label>
+    <input id="daily_rate" type="number" value="">
+    <label for="deduct">Deduction Amount:</label>
+    <input id="deduct" type="number" value="">
+
+    <button onclick="addEmployee()">+ Add</button>
+    <button onclick="deleteEmployee()">- Delete</button>
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>No.</th>
+        <th>Name</th>
+        <th>Days</th>
+        <th>Rate</th>
+        <th>Gross</th>
+        <th>Deduct</th>
+        <th>Net</th>
+      </tr>
+    </thead>
+    <tbody id="payroll-body">
+      <!-- Empty by default -->
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="4">Total</td>
+        <td id="gross-total">0.00</td>
+        <td id="deduct-total">0.00</td>
+        <td id="net-total">0.00</td>
+      </tr>
+    </tfoot>
+  </table>
+
+  <div class="links-container">
+    <a href="index1.html">Back to Home Page</a>
+  </div>
+
+  <script>
+    function getNumberValue(id) {
+      const value = parseFloat(document.getElementById(id).value);
+      return isNaN(value) ? 0 : value;
+    }
+
+    function updateTotals() {
+      const rows = document.querySelectorAll('#payroll-body tr');
+      let gross = 0, deduct = 0, net = 0;
+
+      rows.forEach(row => {
+        gross += parseFloat(row.cells[4].textContent) || 0;
+        deduct += parseFloat(row.cells[5].textContent) || 0;
+        net += parseFloat(row.cells[6].textContent) || 0;
+      });
+
+      document.getElementById('gross-total').textContent = gross.toFixed(2);
+      document.getElementById('deduct-total').textContent = deduct.toFixed(2);
+      document.getElementById('net-total').textContent = net.toFixed(2);
+    }
+
+    function addEmployee() {
+      const name = document.getElementById('name').value;
+      const days = getNumberValue('days_worked');
+      const rate = getNumberValue('daily_rate');
+      const deduction = getNumberValue('deduct');
+      const gross = days * rate;
+      const net = gross - deduction;
+
+      if (!name || days === 0 || rate === 0) {
+        alert("Please enter valid employee details.");
+        return;
+      }
+
+      const tbody = document.getElementById('payroll-body');
+      const row = tbody.insertRow();
+      const index = tbody.rows.length;
+      const data = [index, name, days, rate.toFixed(2), gross.toFixed(2), deduction.toFixed(2), net.toFixed(2)];
+
+      data.forEach(text => {
+        const cell = row.insertCell();
+        cell.textContent = text;
+      });
+
+      updateTotals();
+    }
+
+    function deleteEmployee() {
+      const num = parseInt(prompt("Enter Employee No. to delete:"));
+      const tbody = document.getElementById('payroll-body');
+      if (num > 0 && num <= tbody.rows.length) {
+        tbody.deleteRow(num - 1);
+        Array.from(tbody.rows).forEach((r, i) => r.cells[0].textContent = i + 1);
+        updateTotals();
+      }
+    }
+
+    updateTotals();
+  </script>
+</body>
+</html>
