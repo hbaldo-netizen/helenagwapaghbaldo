@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Website</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Rajdhani:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Rajdhani', sans-serif;
+      background: radial-gradient(circle at center, #1a0033, #0a001a 80%);
+      color: #e0d9ff;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 3.5em;
+      color: #b366ff;
+      text-shadow: 0 0 20px #b366ff, 0 0 40px #8000ff;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      font-size: 1.8em;
+      color: #c7a4ff;
+      text-shadow: 0 0 10px #6f2cff;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    i {
+      display: block;
+      font-size: 1.2em;
+      color: #9e7aff;
+      text-shadow: 0 0 10px #5c00cc;
+      margin-bottom: 40px;
+    }
+
+    .links-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      width: 60%;
+      max-width: 600px;
+    }
+
+    .links-container a {
+      flex: 1 1 40%;
+      text-align: center;
+      padding: 15px 0;
+      background: linear-gradient(135deg, #4b00cc, #9900ff);
+      border: 2px solid #b366ff;
+      border-radius: 10px;
+      color: #fff;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1em;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 15px rgba(179, 102, 255, 0.4);
+    }
+
+    .links-container a:hover {
+      background: linear-gradient(135deg, #b366ff, #6600ff);
+      box-shadow: 0 0 25px #b366ff, 0 0 50px #9900ff;
+      transform: scale(1.05);
+    }
+
+
+    /* Subtle floating animation for futuristic effect */
+    h1, h2, i, .adoforref {
+      animation: floaty 5s ease-in-out infinite alternate;
+    }
+
+    @keyframes floaty {
+      from { transform: translateY(0); }
+      to { transform: translateY(-8px); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Werbshitte Nakesh</h1>
+  <h2>CS 1130 - Introduction to Computing?!</h2>
+  <i>by Baldo Gabrielle  Hero</i>
+
+  <div class="links-container">
+    <a href="conversion1.html">Conversion</a>
+    <a href="incometax1.html">Income Tax Calculator</a>
+    <a href="payroll1.html">Payroll</a>
+    <a href="factorial1.html">Factorial & Natural Numbers</a>
+  </div>
+
+ 
+
+</body>
+</html>
